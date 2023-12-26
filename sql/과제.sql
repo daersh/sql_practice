@@ -107,13 +107,11 @@ WHERE NATIONAL_NAME IN ('한국', '일본');
 
 -- 7. 같은 부서에 근무하는 직원들의 사원명, 부서코드, 동료이름을 조회하시오.
 -- self join 사용(60명)
-SELECT a.EMP_ID, a.EMP_NAME, a.DEPT_CODE,b.EMP_NAME
+SELECT  a.EMP_NAME, a.DEPT_CODE,b.EMP_NAME
  FROM EMPLOYEE a
  JOIN EMPLOYEE b 
- where a.DEPT_CODE = b.DEPT_CODE
- AND a.EMP_ID!=b.EMP_ID ;
-
-select DEPT_CODE, EMP_NAME from employee;
+ where a.emp_id = b.emp_id    -- dept보다는 emp가 좀 더 맞아서 수정 --  
+AND a.EMP_ID!=b.EMP_ID ;
 
 -- 8. 보너스포인트가 없는 직원들 중에서 직급코드가 J4와 J7인 직원들의 사원명, 직급명, 급여를 조회하시오.
 -- 단, join과 IN 사용할 것(8명)
