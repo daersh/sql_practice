@@ -27,7 +27,7 @@ DELETE FROM tbl_menu
  ORDER BY menu_price
  LIMIT 2;
 -- 전체삭제
-DELETE FROM tbl_menu;
+DELETE FROM tbl_menu where 1 = 1;
 
 -- UPDATE 
 -- 서브커리 활용도 가능
@@ -37,8 +37,10 @@ UPDATE tbl_menu
  
 
 -- REPLACE
+-- 권장하지 않는 방법.
 -- 삽입 시 PRIMARY KEY 또는 UNIQUE KEY가 충돌발생한다면 이를 통해 중복된 데이터 덮어쓸 수 있음
-
+-- INTO는 생략 가능
+-- UPDATE 시 WHERE 구문 없이 가능
 REPLACE
   INTO tbl_menu
 (
