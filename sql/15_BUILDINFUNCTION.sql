@@ -123,11 +123,14 @@ SELECT
      , MAKEDATE(2023,35)      as 'MAKEDATE'
 -- 3-11 MAKETIME(시,분,초)
      , MAKETIME(17,50,01)     as 'MAKETIME'
--- 3-12 PERIOD_ADD(연월, 개월수 ), PERIOD_DIFF(연월1, 연월2)
+     
+-- 3-12 PERIOD_ADD(연월, 개월수 ), PERIOD_DIFF(연월1, 연월2)  -- 이거 하지 말 것 시험
+		-- 시험 제외
      , PERIOD_ADD('2023-05-01',1) -- ??? 이건 찾아서 다시 해볼 것
      , PERIOD_DIFF('2024-06-14',CURDATE())
--- 3-13 QUARTER(날짜)
+     
+-- 3-13 QUARTER(날짜) -- 몇 분기인지 
 	 , QUARTER('2023-12-28') as QUARTER
--- 3-14 TIME_TO_SEC()
-     , TIME_TO_SEC(CURTIME())
+-- 3-14 TIME_TO_SEC() -- 오늘 하루 흐른 초
+     , TIME_TO_SEC(CURTIME()) 
 ;
