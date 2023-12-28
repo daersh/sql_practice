@@ -2,7 +2,7 @@
 			  -- mysql에서 제공하는 문자열,숫자,날짜,시간에 관한 내장 함수들 --
 							  -- 1. 문자열 관련 함수 --
 									-- 참고 --
-						-- 문자열을 출력하면 값이 왼쪽벽 붙음 ?? --
+						-- 문자열을 출력하면 값이 왼쪽벽 붙음 ?? mysqlworkbench은 안그런듯 --
 
 -- 1-1 ASCII, CHAR
 -- 영어ㅡ 숫자, 특수기호 제외 한 모든 문자들은 3바이트
@@ -72,17 +72,62 @@ SELECT
 -- 2-4 MOD(num1,num2) -- 모듈러 - 나머지연산
        MOD(10,3)as 'MOD', 10%3,
 -- 2-5 POW(num1,num2),SQRT(num)   -- num1^num2,   제곱근
-       POW(3,2) as 'POW', SQRT(81) as 'SQRT'
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+       POW(3,2) as 'POW', SQRT(81) as 'SQRT',
+-- 2-6 RAND(), RAND()*cnt+start_val
+       RAND() as '(RAND())',
+       FORMAT(FLOOR(RAND()*10+1),0) as 'RAND()*10+1',
+-- 2-7 SIGN(num)   -- 양수: 1, 0: 0, 음수: -1
+       SIGN(10.1), SIGN(0), SIGN(-1.1),
+-- 2-8 TRUNCATE()
+       TRUNCATE(12345.12345,2), TRUNCATE(12345.12345,-2)
 ;
 
 							-- 3. 날짜 및 시간 관련 함수 --
+                            
+SELECT
+-- 3-1 ADDATE(DATE,val), SUBDATE() -- INTERVAL, DAY 제거해도 됨
+       ADDDATE('2023-02-01', INTERVAL 1 DAY  ) as 'ADDDATE'
+     , ADDDATE('2023-02-01',         28      ) as 'ADDDATE2'  
+     , SUBDATE('2023-02-01', INTERVAL 1 MONTH) as 'SUBDATE_MONTH'
+     , ADDDATE('2023-02-01', INTERVAL 1 YEAR ) as 'ADDDATE_YEAR'
+-- 3-2 ADDTIME(날짜/시간, 시간), SUBTIME(날짜/시간, 시간)
+     , ADDTIME('2023-12-28 10:27:00', '1:0:10') as 'ADDTIME'
+     , SUBTIME('2023-12-28 10:27:00', '1:0:10') as 'SUBTIME'
+-- 3-3 CURDATE(), CURTIME(), NOW(), SYSDATE() -- 현재날짜,현재시간,현재날짜+시간,현재 날짜+시간
+	 , CURDATE(), CURTIME(), NOW(), SYSDATE()
+     -- , CURRENT_DATE(), CURRENT_TIME() 도 가능
+     -- , @@GLOBAL.TIME_ZONE -- 현재 타임존 기준 확인하는 조회문 
+-- 3-4 YEAR(), MONTH(), DAY()
+     , YEAR(CURDATE())   as 'YEAR'
+     , MONTH(CURDATE())  as 'MONTH' 
+     , DAY(curdate())    as 'DAY'
+     , DAY('2023-02-01') as 'DAY2'
+-- 3-5 HOUR, MINUTE, SECOND
+	 , HOUR(CURTIME())
+     , MINUTE(CURTIME())
+     , SECOND(CURTIME())
+-- 3-6 DATE, TIME 날짜만 추출, 시간만 추출 
+     , DATE(NOW())
+     , TIME(NOW())
+-- 3-7 DATEDIFF(date1, date2) 날짜 또는 시간 가능? 왼쪽이 큰걸로 해야 양수로 리턴
+     , DATEDIFF('2024-06-14','2023-12-28')
+     , DATEDIFF('2023-12-28','2024-06-14')
+     , TIMEDIFF('18:00:00',CURTIME())
+-- 3-8 DAYOFWEEK(날짜), MONTHNAME(날짜) , DAYOFYEAR(날짜)
+     , DAYOFWEEK(CURDATE()) as 'DAYOFWEEK'
+     , MONTHNAME(CURDATE()) as 'MONTHNAME'
+     , DAYOFYEAR(CURDATE()) as 'DAYOFYEAR'
+-- 3-9 LAST_DAY(날짜)
+     , LAST_DAY('2023-04-01') as 'LAST_DAY'
+-- 3-10 MAKEDATE(year, 지난날짜)     
+     , MAKEDATE(2023,35)      as 'MAKEDATE'
+-- 3-11 MAKETIME(시,분,초)
+     , MAKETIME(17,50,01)     as 'MAKETIME'
+-- 3-12 PERIOD_ADD(연월, 개월수 ), PERIOD_DIFF(연월1, 연월2)
+     , PERIOD_ADD('2023-05-01',1) -- ??? 이건 찾아서 다시 해볼 것
+     , PERIOD_DIFF('2024-06-14',CURDATE())
+-- 3-13 QUARTER(날짜)
+	 , QUARTER('2023-12-28') as QUARTER
+-- 3-14 TIME_TO_SEC()
+     , TIME_TO_SEC(CURTIME())
+;
