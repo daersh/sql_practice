@@ -26,7 +26,6 @@ SELECT
      , instr('사과딸기바나나','딸기')					 	 -- 기준 문자열에서 부분 문자열의 위치반환
      , locate('딸기','사과딸기바나나');   					 -- instr과 동일하지만 순서가 반대
 
-
 -- 1-4 FORMAT  천 단위마다 반올림해줌, 두번째 인자는 소수점 아래 자릿수까지 반올림해서 표현해줌
 select FORMAT(21343421234124.2134124,2);
 -- 1-5 insert(기준 문자열, 위치, 해당 위치에서 지울 길이, 삽입할 문자열)
@@ -60,8 +59,9 @@ SELECT REPEAT('HIHI',5) as 'REPEAT',
 	 , SUBSTRING_INDEX('010-123-1234', 0 , -1)as'SUB_INDEX12'; -- ????
        
                                -- 2. 숫자 관련 함수 --
--- 2-1 ABS(num)
+
 SELECT
+-- 2-1 ABS(num)
        ABS(-123) as 'ABS',-- 123
 -- 2-2 CEILING(num), FLOOR(num), ROUND(num)
        CEILING(1234.56) as 'CEILING', -- 올림
