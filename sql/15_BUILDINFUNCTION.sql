@@ -44,11 +44,45 @@ SELECT INSERT('나와라 피카츄!', 5,2,'꼬') as 'INSERT',
        TRIM(BOTH     '@' FROM '@@@@중앙@@@@') as 'TRIM_BOTH',     -- 양측@제거
 	   TRIM(LEADING  '@' FROM '@@@@중앙@@@@') as 'TRIM_LEADING',  -- 좌@ 제거
        TRIM(TRAILING '@' FROM '@@@@중앙@@@@') as 'TRIM_TRAILING'; -- 우@ 제거 
-
-
+-- 1-10 REPEAT('str',cnt)
+SELECT REPEAT('HIHI',5) as 'REPEAT',
+-- 1-11 REPLACE('str','findStr',changestr) 
+	   REPLACE('HIHOHE','HO','HELL') as 'REPLACE',
+-- 1-12 REVERSE('str')
+	   REVERSE('olleh') as 'REVERSE',
+-- 1-13 SPACE(len)
+       CONCAT('HI',SPACE(3),'HELLO') as 'SPACE',
+-- 1-14 SUBSTRING(str,start_loc,len) -- 문자열 시작지점부터 len까지만 출력
+	   SUBSTRING('열심히 DB 공부를 합시다!',5,4) as 'SUB1'
+     , SUBSTRING('열심히 DB 공부를 합시다!',11) as 'SUB2', -- 11문자열부터 끝까지
+-- 1-15 SUBSTRING_INDEX(str,구분자,횟수)
+	   SUBSTRING_INDEX('010-123-1234','-',2) as'SUB_INDEX1'   -- '-'를 기준으로 2개 출력(010-123)
+	 , SUBSTRING_INDEX('010-123-1234', 0 , -1)as'SUB_INDEX12'; -- ????
+       
                                -- 2. 숫자 관련 함수 --
-                               
-
-
+-- 2-1 ABS(num)
+SELECT
+       ABS(-123) as 'ABS',-- 123
+-- 2-2 CEILING(num), FLOOR(num), ROUND(num)
+       CEILING(1234.56) as 'CEILING', -- 올림
+       FLOOR(1234.56)   as 'FLOOR',   -- 내림
+       ROUND(1234.56)   as 'ROUND',   -- 반올림  
+-- 2-3 CONV(NUM, 원래 진수, 변환할 진수)
+       CONV('A',16,10)  as 'CONV',  -- 16진수의 10을 10진수의 10으로 변경 
+-- 2-4 MOD(num1,num2) -- 모듈러 - 나머지연산
+       MOD(10,3)as 'MOD', 10%3,
+-- 2-5 POW(num1,num2),SQRT(num)   -- num1^num2,   제곱근
+       POW(3,2) as 'POW', SQRT(81) as 'SQRT'
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+;
 
 							-- 3. 날짜 및 시간 관련 함수 --
