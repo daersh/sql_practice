@@ -75,7 +75,7 @@ SELECT
        POW(3,2) as 'POW', SQRT(81) as 'SQRT',
 -- 2-6 RAND(), RAND()*cnt+start_val
        RAND() as '(RAND())',
-       FORMAT(FLOOR(RAND()*10+1),0) as 'RAND()*10+1',
+       FORMAT(FLOOR(RAND()*10+1),0) as 'RAND()*10+0',
 -- 2-7 SIGN(num)   -- 양수: 1, 0: 0, 음수: -1
        SIGN(10.1), SIGN(0), SIGN(-1.1),
 -- 2-8 TRUNCATE()
