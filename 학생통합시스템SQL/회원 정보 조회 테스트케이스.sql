@@ -1,4 +1,6 @@
--- 1. 학생의 전체 정보 조회
+-- ---------------------------------------- 회원 관련 ---------------------------------------- --
+
+								  -- 1. 학생의 전체 정보 조회 --
 SELECT a.id as '학번'
 	 , a.name as '이름'
     -- , a.password as '비밀번호'
@@ -25,7 +27,7 @@ SELECT a.id as '학번'
   JOIN college_recode_tb b on a.id= b.student_id
   JOIN professor_tb c on a.advisor_id = c.id
   JOIN department_tb d on a.department_id = d.id;
--- 3. 학생 자신의 정보를 조회할 시
+							  -- 2. 학생 자신의 정보를 조회할 시 --
 SELECT a.id as '학번'
 	 , a.name as '이름'
      , a.password as '비밀번호'
@@ -54,7 +56,7 @@ SELECT a.id as '학번'
   JOIN department_tb d on a.department_id = d.id
  WHERE a.id= 20230056;
 
--- 2. 교수 전체 정보 조회
+								 -- 3. 교수 전체 정보 조회 --
 SELECT 
 	   a.id as '교수코드'
 	 , a.name as '이름'
@@ -70,7 +72,7 @@ SELECT
   FROM professor_tb as a
   JOIN department_tb as b on a.department_id= b.id;
 
--- 3. 교수 자신의 정보 조회 시
+							 -- 4. 교수 자신의 정보 조회 시 --
 SELECT 
 	   a.id as '교수코드'
 	 , a.name as '이름'
