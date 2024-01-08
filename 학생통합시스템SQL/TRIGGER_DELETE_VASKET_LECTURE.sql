@@ -43,19 +43,20 @@ CREATE OR REPLACE TRIGGER edit_equiment_residual_cnt
        DECLARE new_rental_cnt int;
            SET new_equipment_id = NEW.equipment_id;
            SET new_rental_cnt = NEW.rental_cnt;
-           
-        UPDATE equipment_tb
-           SET equipment_tb.residual_cnt = 100 -- equipment_tb.residual_cnt - new_rental_cnt
+
+		UPDATE equipment_tb
+           SET equipment_tb.residual_cnt = equipment_tb.residual_cnt - new_rental_cnt
 	     WHERE equipment_tb.id = new_equipment_id;
 END //
 DELIMITER ;
 
-
+-- test
 select * from rent_equipment_tb;
 select * from equipment_tb;
 INSERT INTO rent_equipment_tb VALUES (NULL,CURDATE(),CURDATE(),'test',1,1,NULL,20160004);
+
+-- init
 DELETE FROM rent_equipment_tb WHERE rent_equipment_tb.student_id=20160004;
-ROLLBACK;
 UPDATE equipment_tb
-           SET equipment_tb.residual_cnt = 54
+           SET equipment_tb.residual_cnt = 53
 	     WHERE equipment_tb.id = 1;
