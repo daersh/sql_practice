@@ -9,7 +9,10 @@ SELECT b.name, a.name
           where b.name = '컴퓨터공학과'
             and a.grade=1)  as b
 	ON a.curriculum_id = b.id;
-          
+
+SELECT a.id, b.name FROM curriculum_tb a join department_tb b on a.department_id=b.id where b.name = '컴퓨터공학과';
+SELECT *
+FROM curriculum_tb;
 -- 2. 모든 학과 과목 불러오기
 SELECT b.name, a.name
   FROM subject_tb a

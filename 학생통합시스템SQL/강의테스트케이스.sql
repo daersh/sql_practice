@@ -62,10 +62,20 @@ SELECT a.student_id, b.name, c.name
   JOIN lecture_tb c on a.lecture_id = c.id
  where b.id= 20160003;
                                  -- 6. 수강 가능 학과 --
+
 SELECT b.name, c.name
   FROM able_department_tb a
   JOIN lecture_tb b on a.lecture_id = b.id
   JOIN department_tb c on a.department_id = c.id;
+
+
+SELECT b.id,b.name, c.name
+  FROM able_department_tb a
+  JOIN lecture_tb b on a.lecture_id = b.id
+  JOIN department_tb c on a.department_id = c.id
+  JOIN student_tb d on c.id = d.department_id
+ WHERE d.id=20160003;
+  
                         -- 7. 20160003 학번 학생의 이수 강의 목록 --
 SELECT 
        b.id
@@ -97,10 +107,35 @@ SELECT
   JOIN lecture_tb c on a.lecture_id=c.id
  WHERE b.id = 20160003
    AND complete_division = false;
+
+					 -- 9. 20160003학번 학생이 수강중인 강의 조회 --
+SELECT 
+       b.id
+	 , b.name
+     , c.name
+     , result_eng
+     , result_no
+     , complete_division
+	 , appraisal_status
+     , appraisal_content
+     , complete_year
+  FROM course_lecture_tb a
+  JOIN student_tb b on a.student_id=b.id
+  JOIN lecture_tb c on a.lecture_id=c.id
+ WHERE b.id = 20160003
+   AND result_eng = NULL;
 -- ------------------------------------------------------------------------------------------- --
 
 
 select * from course_lecture_tb;
+select * from lecture_tb;
 select * from attendance_tb;
 select * from course_registration_tb;
 select * from course_basket_tb;
+
+SELECT b.id as '교수코드',b.name as '교수', d.id as '학생코드',d.name as '학생'
+  FROM lecture_tb a
+  JOIN professor_tb b on a.professor_id = b.id
+  JOIN course_lecture_tb c on a.id=c.lecture_id
+  JOIN student_tb d on d.id = c.student_id
+ WHERE a.id=221;

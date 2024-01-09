@@ -1,32 +1,32 @@
 -- ---------------------------------------- 기자재 관련 ---------------------------------------- --
 
-								    -- 1. 대여 가능한 기자재 조회 --
-SELECT c.id as '대여자id',c.name as '대여자' ,b.name as '기자재',a.rental__cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
+								    -- 1. 대여한 기자재 이력 조회 -- 제외
+SELECT c.id as '대여자id',c.name as '대여자' ,b.name as '기자재',a.rental_cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
   FROM rent_equipment_tb a 
   JOIN equipment_tb b on a.equipment_id = b.id
   JOIN student_tb c   on a.student_id = c.id;
-select * from rent_equipment_tb;
+select * from rent_equipment_tb; 
 
 								   -- 2. 기자재 대여 이력 조회 --
-SELECT  b.id as '학번 or 교수ID',b.name as '대여자',c.name as '기자재 이름' ,a.rental__cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
+SELECT  b.id as '학번 or 교수ID',b.name as '대여자',c.name as '기자재 이름' ,a.rental_cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
   FROM rent_equipment_tb a
   JOIN student_tb b on a.student_id = b.id
   JOIN equipment_tb c on c.id=a.equipment_id
  UNION
-SELECT  b.id as '학번 or 교수ID',b.name as '대여자',c.name as '기자재 이름',a.rental__cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
+SELECT  b.id as '학번 or 교수ID',b.name as '대여자',c.name as '기자재 이름',a.rental_cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
   FROM rent_equipment_tb a
   JOIN professor_tb b on a.professor_id = b.id
   JOIN equipment_tb c on c.id=a.equipment_id
-  ;
+;
 
 								  -- 3-1. 특정 학생이 대여한 기자재 이력 조회 --
-SELECT c.id as '대여자id',c.name as '대여자' ,b.name as '기자재',a.rental__cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
+SELECT c.id as '대여자id',c.name as '대여자' ,b.name as '기자재',a.rental_cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
   FROM rent_equipment_tb a 
   JOIN equipment_tb b on a.equipment_id = b.id
   JOIN student_tb c on a.student_id=c.id
- WHERE c.id= 20230061 ;
+ WHERE c.id= 20230061;
 								  -- 3-2. 특정 교수가 대여한 기자재 이력 조회 --
-SELECT c.id as '대여자id',c.name as '대여자' ,b.name as '기자재',a.rental__cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
+SELECT c.id as '대여자id',c.name as '대여자' ,b.name as '기자재',a.rental_cnt as '대여수량',a.rental_dt as '대여일',a.due_dt as '반납일'
   FROM rent_equipment_tb a 
   JOIN equipment_tb b on a.equipment_id = b.id
   JOIN professor_tb c on a.professor_id=c.id
