@@ -67,7 +67,7 @@ SELECT
      , category_code
      , SUM(menu_price)
   FROM tbl_menu
- GROUP BY menu_price, category_code;
+ GROUP BY menu_price, category_code
   WITH ROLLUP;
 
 							-- SALES 테이블 예제 --
